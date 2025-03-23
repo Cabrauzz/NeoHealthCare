@@ -16,11 +16,6 @@ public class GlobalExceptionHandler {
     return ResponseEntity.notFound().build();
   }
 
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity error500(Exception ex, WebRequest request) {
-    return ResponseEntity.internalServerError().body(" Usuário inexistente ou senha inválida");
-  }
-
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity error400(MethodArgumentNotValidException ex, WebRequest request) {
     var error = ex.getFieldErrors();

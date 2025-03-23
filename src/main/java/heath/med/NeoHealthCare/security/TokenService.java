@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import heath.med.NeoHealthCare.domain.usuario.Usuario;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,9 +16,12 @@ import java.time.ZoneOffset;
 @Log4j2
 public class TokenService {
 
+  @Value("${api.security.token.secret}")
+  private String secret;
+
   public String acessoToken(Usuario usuario) {
     try {
-      Algorithm algrt = Algorithm.HMAC256("123456");
+      Algorithm algrt = Algorithm.HMAC256(secret);
       return JWT.create()
           .withIssuer("NeoHealthCare")
           .withSubject(usuario.getLogin())

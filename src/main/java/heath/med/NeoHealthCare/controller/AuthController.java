@@ -2,6 +2,7 @@ package heath.med.NeoHealthCare.controller;
 
 import heath.med.NeoHealthCare.domain.usuario.DadosAutenticacao;
 import heath.med.NeoHealthCare.domain.usuario.Usuario;
+import heath.med.NeoHealthCare.security.DadosTokenJWT;
 import heath.med.NeoHealthCare.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class AuthController {
   public ResponseEntity login(@RequestBody @Valid DadosAutenticacao dados) {
     var token = new UsernamePasswordAuthenticationToken(dados.getLogin(), dados.getSenha());
     Authentication authenticate = manager.authenticate(token);
-    return ResponseEntity.ok(tokenService.acessoToken((Usuario) authenticate.getPrincipal()));
+    String authJWT = tokenService.acessoToken((Usuario) authenticate.getPrincipal());
+    return ResponseEntity.ok(new DadosTokenJWT(authJWT));
   }
 
 }
