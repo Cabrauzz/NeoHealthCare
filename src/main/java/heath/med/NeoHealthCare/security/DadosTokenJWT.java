@@ -13,4 +13,3 @@ public class DadosTokenJWT {
 
   private String token;
 }
-
