@@ -3,6 +3,7 @@ package heath.med.NeoHealthCare.security;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import heath.med.NeoHealthCare.domain.usuario.Usuario;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +22,7 @@ public class TokenService {
 
   public String acessoToken(Usuario usuario) {
     try {
-      Algorithm algrt = Algorithm.HMAC256(secret);
+      Algorithm algrt = Algorithm.HMAC256("123456");
       return JWT.create()
           .withIssuer("NeoHealthCare")
           .withSubject(usuario.getLogin())
@@ -32,7 +33,21 @@ public class TokenService {
     }
   }
 
+
+  public String getSubject(String token){
+    try {
+      Algorithm algrt = Algorithm.HMAC256("123456");
+      return JWT.require(algrt)
+          .withIssuer("NeoHealthCare")
+          .build()
+          .verify(token)
+          .getSubject();
+    } catch (JWTVerificationException e){
+      throw new RuntimeException("token invalido");
+    }
+  }
+
   private Instant expireToken() {
-    return LocalDateTime.now().plusMinutes(1).toInstant(ZoneOffset.of("-03:00"));
+    return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
   }
 }
