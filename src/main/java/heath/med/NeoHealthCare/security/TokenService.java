@@ -33,8 +33,8 @@ public class TokenService {
     }
   }
 
-
-  public String getSubject(String token){
+  //Valida o token
+  public String getSubject(String token) {
     try {
       Algorithm algrt = Algorithm.HMAC256("123456");
       return JWT.require(algrt)
@@ -42,12 +42,12 @@ public class TokenService {
           .build()
           .verify(token)
           .getSubject();
-    } catch (JWTVerificationException e){
+    } catch (JWTVerificationException e) {
       throw new RuntimeException("token invalido");
     }
   }
 
   private Instant expireToken() {
-    return LocalDateTime.now().plusHours(1).toInstant(ZoneOffset.of("-03:00"));
+    return LocalDateTime.now().plusMinutes(1).toInstant(ZoneOffset.of("-03:00"));
   }
 }
