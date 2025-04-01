@@ -32,6 +32,7 @@ public class AuthSecurity extends OncePerRequestFilter {
       var subject = tokenService.getSubject(tokenJWT);
       var user = usuarioRepository.findByLogin(subject);
 
+      //Autentica o usuario
       var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
       SecurityContextHolder.getContext().setAuthentication(authentication);
 
