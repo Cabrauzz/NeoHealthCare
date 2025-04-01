@@ -27,6 +27,7 @@ public class AuthSecurity extends OncePerRequestFilter {
     //Recupera o token do cabeçalho.
     var tokenJWT = recuperarToken(request);
 
+    // entra neste trexo caso o usuario autenticou previamente
     if (tokenJWT != null) {
       var subject = tokenService.getSubject(tokenJWT);
       var user = usuarioRepository.findByLogin(subject);
