@@ -1,6 +1,6 @@
 package heath.med.NeoHealthCare.security;
 
-import heath.med.NeoHealthCare.domain.usuario.UsuarioRepository;
+import heath.med.NeoHealthCare.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -2,7 +2,7 @@ package heath.med.NeoHealthCare.controller;
 
 import heath.med.NeoHealthCare.domain.medico.DadosDetalhamentoMedico;
 import heath.med.NeoHealthCare.domain.medico.Medico;
-import heath.med.NeoHealthCare.domain.medico.MedicoRepository;
+import heath.med.NeoHealthCare.repository.MedicoRepository;
 import heath.med.NeoHealthCare.dto.MedicoUpdateDTO;
 import heath.med.NeoHealthCare.service.MedicoService;
 import jakarta.validation.Valid;

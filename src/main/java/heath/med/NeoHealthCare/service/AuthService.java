@@ -1,6 +1,6 @@
 package heath.med.NeoHealthCare.service;
 
-import heath.med.NeoHealthCare.domain.usuario.UsuarioRepository;
+import heath.med.NeoHealthCare.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,5 +1,6 @@
-package heath.med.NeoHealthCare.domain.usuario;
+package heath.med.NeoHealthCare.repository;
 
+import heath.med.NeoHealthCare.domain.usuario.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 

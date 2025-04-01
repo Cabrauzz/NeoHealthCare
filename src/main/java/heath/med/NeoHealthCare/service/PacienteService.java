@@ -1,7 +1,7 @@
 package heath.med.NeoHealthCare.service;
 
 import heath.med.NeoHealthCare.domain.paciente.Paciente;
-import heath.med.NeoHealthCare.domain.paciente.PacienteRepository;
+import heath.med.NeoHealthCare.repository.PacienteRepository;
 import heath.med.NeoHealthCare.dto.PacienteUpdateDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
