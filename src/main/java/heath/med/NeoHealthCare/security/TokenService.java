@@ -22,7 +22,7 @@ public class TokenService {
 
   public String acessoToken(Usuario usuario) {
     try {
-      Algorithm algrt = Algorithm.HMAC256("123456");
+      Algorithm algrt = Algorithm.HMAC256(secret);
       return JWT.create()
           .withIssuer("NeoHealthCare")
           .withSubject(usuario.getLogin())
@@ -36,7 +36,7 @@ public class TokenService {
   //Valida o token
   public String getSubject(String token) {
     try {
-      Algorithm algrt = Algorithm.HMAC256("123456");
+      Algorithm algrt = Algorithm.HMAC256(secret);
       return JWT.require(algrt)
           .withIssuer("NeoHealthCare")
           .build()
