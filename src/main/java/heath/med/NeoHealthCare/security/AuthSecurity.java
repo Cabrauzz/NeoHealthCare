@@ -35,8 +35,6 @@ public class AuthSecurity extends OncePerRequestFilter {
       //Autentica o usuario
       var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
       SecurityContextHolder.getContext().setAuthentication(authentication);
-
-      System.out.println("logado");
     }
 
     //Necessário para chamar o próximo filtro na aplicação.
