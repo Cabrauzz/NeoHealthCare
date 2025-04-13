@@ -29,4 +29,11 @@ public class Consulta {
 
   private LocalDateTime data;
 
+  @Column(name = "motivo_cancelamento")
+  @Enumerated(EnumType.STRING)
+  private Cancelamento cancelamentoConsulta;
+
+  public void cancelar(Cancelamento motivo) {
+    this.cancelamentoConsulta = motivo;
+  }
 }
