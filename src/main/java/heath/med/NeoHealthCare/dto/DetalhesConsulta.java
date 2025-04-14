@@ -1,5 +1,6 @@
 package heath.med.NeoHealthCare.dto;
 
+import heath.med.NeoHealthCare.consulta.Consulta;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,8 +10,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class DetalhesConsulta {
 
   private Long id;
@@ -21,4 +22,7 @@ public class DetalhesConsulta {
 
   private LocalDateTime data;
 
+  public DetalhesConsulta(Consulta consulta) {
+    this(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData());
+  }
 }

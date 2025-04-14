@@ -6,7 +6,6 @@ import heath.med.NeoHealthCare.dto.DetalhesConsulta;
 import heath.med.NeoHealthCare.service.ConsultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,8 @@ public class ConsultaController {
   @PostMapping
   @Transactional
   public ResponseEntity agendamento(@RequestBody @Valid AgendamentoConsultaDTO consulta){
-    consultaService.agendar(consulta);
-    return ResponseEntity.ok(new DetalhesConsulta(null, null , null, null));
+    DetalhesConsulta agendar = consultaService.agendar(consulta);
+    return ResponseEntity.ok(agendar);
   }
 
   @DeleteMapping("/canceled")

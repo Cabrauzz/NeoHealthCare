@@ -31,6 +31,11 @@ public class GlobalExceptionHandler {
     return ResponseEntity.badRequest().body(ex.getMessage());
   }
 
+  @ExceptionHandler(GenericException.class)
+  public ResponseEntity tratarErroNegocioPaciente(GenericException ex) {
+    return ResponseEntity.badRequest().body(ex.getMessage());
+  }
+
   @ExceptionHandler(BadCredentialsException.class)
   public ResponseEntity tratarErroBadCredentials() {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
