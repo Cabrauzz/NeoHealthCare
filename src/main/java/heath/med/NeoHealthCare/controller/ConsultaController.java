@@ -27,7 +27,7 @@ public class ConsultaController {
   @DeleteMapping("/canceled")
   @Transactional
   public ResponseEntity cancelar(@RequestBody @Valid CancelamentoConsulta cancelamentoConsulta) {
-    consultaService.deletarConsulta(cancelamentoConsulta.getIdConsulta());
+    consultaService.deletarConsulta(cancelamentoConsulta.getIdConsulta(), cancelamentoConsulta.getMotivoCancelamento());
     return ResponseEntity.noContent().build();
   }
 }

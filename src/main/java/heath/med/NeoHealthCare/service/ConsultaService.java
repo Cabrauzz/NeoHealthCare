@@ -1,5 +1,6 @@
 package heath.med.NeoHealthCare.service;
 
+import heath.med.NeoHealthCare.consulta.Cancelamento;
 import heath.med.NeoHealthCare.consulta.Consulta;
 import heath.med.NeoHealthCare.consulta.validacoes.ValidarAgendamento;
 import heath.med.NeoHealthCare.dto.DetalhesConsulta;
@@ -59,8 +60,9 @@ public class ConsultaService {
     return medicoRepository.randomMedico(agendamentoConsulta.getEspecialidade(), agendamentoConsulta.getData());
   }
 
-  public void deletarConsulta(Long id) {
+  public void deletarConsulta(Long id, Cancelamento motivoCancelamento) {
     var consulta = consultaRepository.getReferenceById(id);
+    consulta.setCancelamentoConsulta(motivoCancelamento);
     consultaRepository.save(consulta);
   }
 }
