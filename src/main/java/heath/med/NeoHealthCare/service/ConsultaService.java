@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class ConsultaService {
@@ -44,22 +45,32 @@ public class ConsultaService {
     var paciente = pacienteRepository.getReferenceById(agendamentoConsulta.getIdPaciente());
     var medico = selecionarMedico(agendamentoConsulta);
     Consulta consulta = new Consulta(null, medico, paciente, agendamentoConsulta.getData(), null);
+
+    if (medico == null){
+      throw new GenericException("Não existe médico disponível.");
+    }
     consultaRepository.save(consulta);
 
     return new DetalhesConsulta(consulta);
   }
 
   private Medico selecionarMedico(AgendamentoConsultaDTO agendamentoConsulta) {
-    if (agendamentoConsulta.getIdMedico() != null){
+    if (agendamentoConsulta.getIdMedico() != null) {
       return medicoRepository.getReferenceById(agendamentoConsulta.getIdMedico());
     }
 
-    if(agendamentoConsulta.getEspecialidade() == null){
-      throw new GenericException("Campo Especialidade Obrigatória");
+    if (agendamentoConsulta.getEspecialidade() == null) {
+      throw new GenericException("Campo Especialidade Obrigatória, quando o médico não for informado");
     }
-    return medicoRepository.randomMedico(agendamentoConsulta.getEspecialidade(), agendamentoConsulta.getData());
-  }
 
+    var medicosDisponiveis = medicoRepository.randomMedico(agendamentoConsulta.getEspecialidade(), agendamentoConsulta.getData());
+    if (medicosDisponiveis.isEmpty()) {
+      throw new GenericException("Não existe médico disponível.");
+    }
+
+    // Seleciona um médico aleatoriamente da lista
+    return medicosDisponiveis.get(new Random().nextInt(medicosDisponiveis.size()));
+  }
   public void deletarConsulta(Long id, Cancelamento motivoCancelamento) {
     var consulta = consultaRepository.getReferenceById(id);
     consulta.setCancelamentoConsulta(motivoCancelamento);

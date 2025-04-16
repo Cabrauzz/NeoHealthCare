@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface MedicoRepository extends JpaRepository<Medico, Long> {
 
@@ -29,7 +30,7 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     )
     order by function('rand')
 """)
-  Medico randomMedico(Especialidade especialidade, @NotNull @Future LocalDateTime data);
+  List<Medico> randomMedico(Especialidade especialidade, @NotNull @Future LocalDateTime data);
 
   @Query("""
       select m.ativo from Medico m
