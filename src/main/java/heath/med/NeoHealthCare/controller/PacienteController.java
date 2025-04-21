@@ -6,6 +6,7 @@ import heath.med.NeoHealthCare.domain.paciente.DadosDetalhamentoPaciente;
 import heath.med.NeoHealthCare.domain.paciente.Paciente;
 import heath.med.NeoHealthCare.repository.PacienteRepository;
 import heath.med.NeoHealthCare.service.PacienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/v1")
+@SecurityRequirement(name = "bearer-key")
 public class PacienteController {
 
   @Autowired

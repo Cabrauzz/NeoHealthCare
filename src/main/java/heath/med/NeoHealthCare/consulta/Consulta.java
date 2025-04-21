@@ -5,6 +5,7 @@ import heath.med.NeoHealthCare.domain.paciente.Paciente;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
