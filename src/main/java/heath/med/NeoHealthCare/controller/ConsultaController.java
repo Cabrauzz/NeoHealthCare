@@ -19,7 +19,7 @@ public class ConsultaController {
   @Autowired
   private ConsultaService consultaService;
 
-  @PostMapping("/consultas")
+  @PostMapping("/consulta")
   @Transactional
   public ResponseEntity agendamento(@RequestBody @Valid AgendamentoConsultaDTO consulta) {
     DetalhesConsulta agendar = consultaService.agendar(consulta);
