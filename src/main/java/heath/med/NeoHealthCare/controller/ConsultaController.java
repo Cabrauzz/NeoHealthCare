@@ -1,0 +1,35 @@
+package heath.med.NeoHealthCare.controller;
+
+import heath.med.NeoHealthCare.consulta.CancelamentoConsulta;
+import heath.med.NeoHealthCare.dto.AgendamentoConsultaDTO;
+import heath.med.NeoHealthCare.dto.DetalhesConsulta;
+import heath.med.NeoHealthCare.service.ConsultaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/v1")
+@SecurityRequirement(name = "bearer-key")
+public class ConsultaController {
+
+  @Autowired
+  private ConsultaService consultaService;
+
+  @PostMapping("/consulta")
+  @Transactional
+  public ResponseEntity agendamento(@RequestBody @Valid AgendamentoConsultaDTO consulta) {
+    DetalhesConsulta agendar = consultaService.agendar(consulta);
+    return ResponseEntity.ok(agendar);
+  }
+
+  @DeleteMapping("/canceled")
+  @Transactional
+  public ResponseEntity cancelar(@RequestBody @Valid CancelamentoConsulta cancelamentoConsulta) {
+    consultaService.deletarConsulta(cancelamentoConsulta.getIdConsulta(), cancelamentoConsulta.getMotivoCancelamento());
+    return ResponseEntity.noContent().build();
+  }
+}
